@@ -10,11 +10,11 @@ class fonction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'nom',
     ];
 
-    public function employees()
+    public function agents()
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Agent::class);
     }
 }

@@ -10,7 +10,12 @@ class Section extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'nom',
     ];
+
+    public function agents()
+    {
+        return $this->hasMany(Agent::class);
+    }
 
 }

@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('dependants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrainted();
-            $table->string('relationship');
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('firstname');
-            $table->foreignId('city_id')->constrainted();
-            $table->date('birth_date');
+            $table->foreignId('agent_id')->constrainted();
+            $table->string('relation');
+            $table->string('nom');
+            $table->string('postnom');
+            $table->string('prenom');
+            $table->foreignId('ville_id')->constrainted();
+            $table->date('date_naissance');
             $table->boolean('is_actif');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

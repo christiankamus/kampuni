@@ -14,13 +14,13 @@ class Service extends Model
         'name',
     ];
 
-    public function department()
+    public function departement()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Departement::class);
     }
 
-    public function employees()
+    public function agents()
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Agent::class);
     }
 }

@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('departements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agent_id')->constrainted();
-            $table->foreignId('entreprise_id')->constrainted();
-            $table->date('date_debut');
-            $table->date('date_fin');
-            $table->string('details');
+            $table->string('nom')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('departements');
     }
 };

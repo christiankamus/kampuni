@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('sanction__disciplinaires', function (Blueprint $table) {
             $table->id();
             $table->foreignId('agent_id')->constrainted();
-            $table->foreignId('entreprise_id')->constrainted();
-            $table->date('date_debut');
-            $table->date('date_fin');
-            $table->string('details');
+            $table->date('date_sanction');
+            $table->foreignId('type_sanction_id')->constrainted();
+            $table->string('faute_commise');
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('sanction__disciplinaires');
     }
 };

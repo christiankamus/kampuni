@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Site extends Model
+class Type_Sanction extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nom',
-        'user_id',
     ];
 
-    public function agents()
+    public function sanction_disciplinaires()
     {
-        return $this->hasMany(Agent::class);
+        return $this->hasMany(Sanction_Disciplinaire::class);
     }
 }

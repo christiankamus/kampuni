@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Experience extends Model
+class Conge extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'agent_id',
-        'entreprise_id',
+        'exercice_id',
         'date_debut',
         'date_fin',
-        'details',
+        'jours_pris',
+
     ];
 
     public function agent()
@@ -22,4 +23,8 @@ class Experience extends Model
         return $this->belongsTo(Agent::class);
     }
 
+    public function exercice()
+    {
+        return $this->belongsTo(Exercice::class);
+    }
 }

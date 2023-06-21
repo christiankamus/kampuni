@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Site extends Model
+class Type_Contrat extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nom',
-        'user_id',
     ];
 
-    public function agents()
+    public function contrats()
     {
-        return $this->hasMany(Agent::class);
+        return $this->hasMany(Contrat::class);
     }
 }

@@ -10,24 +10,27 @@ class Dependant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employee_id',
-        'relationship',
-        'name',
-        'lastname',
-        'firstname',
-        'city_id',
-        'birth_date',
+        'agent_id',
+        'relation',
+        'nom',
+        'postnom',
+        'prenom',
+        'ville_id',
+        'date_naissance',
         'is_actif',
+        'observation',
     ];
 
-    public function employee()
+
+
+    public function agent()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(Agent::class);
     }
 
-    public function city()
+    public function ville()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(Ville::class);
     }
 
 }

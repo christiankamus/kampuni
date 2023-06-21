@@ -5,17 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Site extends Model
+class Province extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'pays_id',
         'nom',
-        'user_id',
     ];
 
     public function agents()
     {
         return $this->hasMany(Agent::class);
+    }
+
+    public function villes()
+    {
+        return $this->hasMany(Ville::class);
+    }
+
+    public function pays()
+    {
+        return $this->belongsTo(pays::class);
     }
 }

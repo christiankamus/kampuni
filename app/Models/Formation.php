@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Experience extends Model
+class Formation extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,8 @@ class Experience extends Model
         'entreprise_id',
         'date_debut',
         'date_fin',
-        'details',
+        'evaluation',
+        'consideration',
     ];
 
     public function agent()
@@ -22,4 +23,8 @@ class Experience extends Model
         return $this->belongsTo(Agent::class);
     }
 
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
+    }
 }
