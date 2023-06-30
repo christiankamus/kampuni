@@ -48,7 +48,11 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
         //Create admins
-        $userRole = Role::create(['name' => 'user'])->syncpermissions([
+        $gspRole = Role::create(['name' => 'gsp'])->syncpermissions([
+            $miscPermission,
+        ]);
+
+        $drhRole = Role::create(['name' => 'drh'])->syncpermissions([
             $miscPermission,
         ]);
 
@@ -79,13 +83,23 @@ class RolesAndPermissionsSeeder extends Seeder
         ])->assignRole($superAdminRole);
 
         User::create([
-            'name' => 'Test user',
-            'is_admin' => 0,
-            'email' => 'test@user.com',
+            'name' => 'DRH Admin',
+            'is_admin' => 1,
+            'email' => 'drh@user.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Katanga.123'),
             'remember_token' => Str::random(10),
-        ])->assignRole($userRole);
+        ])->assignRole($superAdminRole);
+
+        User::create([
+            'name' => 'GSP user',
+            'is_admin' => 1,
+            'email' => 'gsp@user.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Katanga.123'),
+            'remember_token' => Str::random(10),
+        ])->assignRole($gspRole);
+
 
     }
 }

@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,7 +23,7 @@ class SectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'Corporate structure';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -30,7 +31,12 @@ class SectionResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        TextInput::make('name')
+                        Select::make('service_id')
+                            ->relationship('service','nom')
+                            ->searchable()
+                            ->preload(),
+                        TextInput::make('nom')
+                            ->unique(ignoreRecord: true)
                             ->required()
                             ->maxLength(255),
                             ])
@@ -41,7 +47,8 @@ class SectionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('nom')->sortable()->searchable(),
+                TextColumn::make('departement.nom')->sortable()->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime(),
 

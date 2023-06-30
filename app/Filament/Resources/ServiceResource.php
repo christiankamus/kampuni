@@ -16,14 +16,19 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ServiceResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ServiceResource\RelationManagers;
+use App\Filament\Resources\ServiceResource\RelationManagers\SectionsRelationManager;
 
 class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-puzzle';
 
-    protected static ?string $navigationGroup = 'Corporate structure';
+    protected static ?string $navigationGroup = 'Organisation';
+
+    protected static ?string $navigationLabel = 'Sections par service';
+
+    
 
     public static function form(Form $form): Form
     {
@@ -31,9 +36,12 @@ class ServiceResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        Select::make('department_id')
-                            ->relationship('department','name'),
-                        TextInput::make('name')
+                        Select::make('departement_id')
+                            ->relationship('departement','nom')
+                            ->searchable()
+                            ->preload(),
+                        TextInput::make('nom')
+                            ->unique(ignoreRecord: true)
                             ->required()
                             ->maxLength(255),
                     ])
@@ -45,8 +53,8 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('department.name')->sortable()->searchable(),
+                TextColumn::make('nom')->sortable()->searchable(),
+                TextColumn::make('departement.nom')->sortable()->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime(),
 
@@ -55,18 +63,27 @@ class ServiceResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                //Tables\Actions\EditAction::make(),
+                //Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+    
+    public static function getRelations(): array
+    {
+        return [
+            SectionsRelationManager::class,
+        ];
     }
     
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageServices::route('/'),
+            'index' => Pages\ListServices::route('/'),
+            'create' => Pages\CreateService::route('/create'),
+            'edit' => Pages\EditService::route('/{record}/edit'),
         ];
     }    
 }

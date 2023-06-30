@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\FonctionResource\Pages;
@@ -19,9 +20,12 @@ class FonctionResource extends Resource
 {
     protected static ?string $model = Fonction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    protected static ?string $navigationGroup = 'Corporate structure';
+    protected static ?string $navigationLabel = 'Fonctions';
+
+    protected static ?string $navigationGroup = 'Organisation';
+
 
     public static function form(Form $form): Form
     {
@@ -29,7 +33,7 @@ class FonctionResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        TextInput::make('name')
+                        TextInput::make('nom')
                             ->required()
                             ->maxLength(255),
                             ])
@@ -40,9 +44,11 @@ class FonctionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                TextColumn::make('nom')->sortable()->searchable(),
+                TextColumn::make('created_at')
+                    ->dateTime('d-M-Y')->sortable()->searchable()->label('Créé le'),
+                TextColumn::make('updated_at')
+                    ->dateTime('d-M-Y')->sortable()->searchable()->label('Modifié le'),
 
             ])
             ->filters([

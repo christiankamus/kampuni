@@ -19,7 +19,7 @@ class ExperienceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'RH Management';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {

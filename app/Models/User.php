@@ -40,6 +40,8 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Site::class);
     }
 
+    
+
     /**
      * The attributes that should be hidden for serialization.
      *

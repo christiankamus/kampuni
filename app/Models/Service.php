@@ -11,7 +11,7 @@ class Service extends Model
 
     protected $fillable = [
         'department_id',
-        'name',
+        'nom',
     ];
 
     public function departement()
@@ -22,5 +22,10 @@ class Service extends Model
     public function agents()
     {
         return $this->hasMany(Agent::class);
+    }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class);
     }
 }

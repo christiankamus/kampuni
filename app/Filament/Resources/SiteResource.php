@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,9 +21,12 @@ class SiteResource extends Resource
 {
     protected static ?string $model = Site::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-office-building';
 
-    protected static ?string $navigationGroup = 'Corporate structure';
+    
+    protected static ?string $navigationGroup = 'Organisation';
+
+    protected static ?string $navigationLabel = 'Sites';
 
     public static function form(Form $form): Form
     {
@@ -30,7 +34,12 @@ class SiteResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        TextInput::make('name')
+                        Select::make('user_id')
+                            ->relationship('user','name')
+                            ->searchable()
+                            ->preload()
+                            ->label('GSP'),
+                        TextInput::make('nom')
                             ->required()
                             ->maxLength(255),
                             ])
@@ -41,7 +50,8 @@ class SiteResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->sortable()->searchable(),
+                TextColumn::make('nom')->sortable()->searchable(),
+                TextColumn::make('user.name')->sortable()->searchable()->label('GSP'),
                 TextColumn::make('created_at')
                     ->dateTime(),
             ])

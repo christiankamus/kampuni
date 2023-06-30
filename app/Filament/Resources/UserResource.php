@@ -26,6 +26,7 @@ use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
+use PHPUnit\Runner\Filter\NameFilterIterator;
 
 class UserResource extends Resource
 {
@@ -33,9 +34,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
-    protected static ?string $navigationGroup = 'Access Management';
+    protected static ?string $navigationGroup = 'Gestion des accès';
 
-    //protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationLabel = 'Utilisateurs';
+
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -51,7 +58,8 @@ class UserResource extends Resource
                     TextInput::make('email')
                         ->email()
                         ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->unique(ignoreRecord: true),
 
                     TextInput::make('password')
                         ->password()
@@ -70,7 +78,7 @@ class UserResource extends Resource
                     CheckboxList::make('roles')
                         ->relationship('roles','name')
                         ->columns(3)
-                        ->helperText('Only choose one role!')
+                        ->helperText('Veuillez selectionner un seul role!')
                         ->required(),
                     ])
             ]);

@@ -25,14 +25,14 @@ class DependantResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'RH Management';
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('employee_id')
-                    ->relationship('employee','name')
+                Select::make('agent_id')
+                    ->relationship('agent','nom')
                     ->required(),
                 Select::make('relationship')
                     ->required()
@@ -40,17 +40,17 @@ class DependantResource extends Resource
                         'Enfant' => 'Enfant',
                         'Conjoint' => 'Conjoint',
                     ]),
-                TextInput::make('name')
+                TextInput::make('nom')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('lastname')
+                TextInput::make('postnom')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('firstname')
+                TextInput::make('prenom')
                     ->required()
                     ->maxLength(255),
-                Select::make('city_id')
-                    ->relationship('city','name')
+                Select::make('ville_id')
+                    ->relationship('ville','nom')
                     ->required(),
                 DatePicker::make('birth_date')
                     ->required(),

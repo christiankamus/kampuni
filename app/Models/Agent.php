@@ -54,6 +54,17 @@ class Agent extends Model
         return $this->hasMany(Experience::class);
     }
 
+    public function dependants()
+    {
+        return $this->hasMany(Dependant::class);
+    }
+
+    public function dossier_agents()
+    {
+        return $this->hasMany(Dossier_Agent::class);
+    }
+
+
     public function conges()
     {
         return $this->hasMany(Conge::class);

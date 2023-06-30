@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Filament\Facades\Filament;
 use Illuminate\Support\ServiceProvider;
+use Filament\Navigation\NavigationGroup;
 use Statikbe\FilamentTranslationManager\FilamentTranslationManager;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        FilamentTranslationManager::setLocales(['en', 'fr']);
+        //FilamentTranslationManager::setLocales(['en', 'fr']);
+        
     }
 }

@@ -22,4 +22,9 @@ class Experience extends Model
         return $this->belongsTo(Agent::class);
     }
 
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
+    }
+
 }

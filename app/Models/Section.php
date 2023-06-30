@@ -10,12 +10,18 @@ class Section extends Model
     use HasFactory;
 
     protected $fillable = [
+        'service_id',
         'nom',
     ];
 
     public function agents()
     {
         return $this->hasMany(Agent::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
     }
 
 }
