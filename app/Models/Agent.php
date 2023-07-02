@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agent extends Model
 {
     use HasFactory;
+    use Userstamps;
 
     protected $fillable = [
         'matricule',
@@ -37,6 +38,7 @@ class Agent extends Model
         'service_id',
         'departement_id',
         'site_id',
+        'is_actif',
     ];
 
     public function contrats()
