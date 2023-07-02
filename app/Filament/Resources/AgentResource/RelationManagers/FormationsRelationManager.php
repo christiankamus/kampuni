@@ -36,6 +36,7 @@ class FormationsRelationManager extends RelationManager
                 DatePicker::make('date_debut')
                     ->required(),
                 DatePicker::make('date_fin')
+                    ->after('date_debut')
                     ->required(),
                 TextInput::make('evaluation')
                     ->required()

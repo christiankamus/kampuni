@@ -10,6 +10,8 @@ class ListAgents extends ListRecords
 {
     protected static string $resource = AgentResource::class;
 
+   
+
     protected function getActions(): array
     {
         return [

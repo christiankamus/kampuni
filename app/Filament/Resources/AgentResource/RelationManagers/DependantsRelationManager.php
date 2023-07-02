@@ -62,6 +62,7 @@ class DependantsRelationManager extends RelationManager
                 TextColumn::make('prenom')->sortable(),
                 TextColumn::make('ville.nom')->sortable()->label('Lieu de naissance'),
                 TextColumn::make('date_naissance')->label('Date de naissance')
+                    ->before('yesterday')
                     ->dateTime('d-M-Y')->sortable(),
                 IconColumn::make('is_actif')->label('Est actif')
                     ->boolean()->sortable(),

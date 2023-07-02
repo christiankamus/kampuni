@@ -82,7 +82,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'remember_token' => Str::random(10),
         ])->assignRole($superAdminRole);
 
-        User::create([
+        /*User::create([
             'name' => 'DRH Admin',
             'is_admin' => 1,
             'email' => 'drh@user.com',
@@ -98,7 +98,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('Katanga.123'),
             'remember_token' => Str::random(10),
-        ])->assignRole($gspRole);
+        ])->assignRole($gspRole);*/
 
 
     }

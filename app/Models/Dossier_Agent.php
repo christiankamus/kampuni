@@ -13,6 +13,7 @@ class Dossier_Agent extends Model
         'agent_id',
         'type_document_id',
         'commentaire',
+        'document',
 
     ];
 

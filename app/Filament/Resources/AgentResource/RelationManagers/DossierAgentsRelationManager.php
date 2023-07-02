@@ -28,6 +28,12 @@ class DossierAgentsRelationManager extends RelationManager
                     ->preload()
                     ->searchable()
                     ->required(),
+                Forms\Components\FileUpload::make('document')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->directory('dossiers-agent')
+                    ->storeFileNamesIn('original_filename')
+                    ->enableOpen()
+                    ->enableDownload(),
                 TextInput::make('commentaire')
                     ->maxLength(255),
 
