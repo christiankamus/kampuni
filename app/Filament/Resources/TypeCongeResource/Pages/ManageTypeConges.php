@@ -10,6 +10,8 @@ class ManageTypeConges extends ManageRecords
 {
     protected static string $resource = TypeCongeResource::class;
 
+    protected ?string $heading = 'Liste des types de congé';
+
     protected function getActions(): array
     {
         return [

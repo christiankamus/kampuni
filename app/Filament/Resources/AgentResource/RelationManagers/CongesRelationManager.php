@@ -32,6 +32,7 @@ class CongesRelationManager extends RelationManager
                 DatePicker::make('date_debut')
                     ->required(),
                 DatePicker::make('date_fin')
+                    ->after('date_debut')
                     ->required(),
                 TextInput::make('jours_pris')
                     ->required(),
@@ -45,7 +46,7 @@ class CongesRelationManager extends RelationManager
                 TextColumn::make('exercice.nom'),
                 TextColumn::make('date_debut')
                     ->dateTime('d-M-Y')->sortable(),
-                TextColumn::make('date_fin')
+                TextColumn::make('date_fin')                    
                     ->dateTime('d-M-Y')->sortable(),
                 TextColumn::make('jours_pris'),
             ])

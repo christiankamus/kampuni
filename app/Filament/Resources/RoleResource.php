@@ -28,6 +28,8 @@ class RoleResource extends Resource
 
     protected static ?string $navigationLabel = 'Rôles';
 
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {

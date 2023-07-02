@@ -37,6 +37,7 @@ class Agent extends Model
         'service_id',
         'departement_id',
         'site_id',
+        'is_actif',
     ];
 
     public function contrats()

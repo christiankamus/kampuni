@@ -40,6 +40,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrainted();
             $table->foreignId('departement_id')->constrainted();
             $table->foreignId('site_id')->constrainted();
+            $table->boolean('is_actif');
             $table->timestamps();
         });
     }

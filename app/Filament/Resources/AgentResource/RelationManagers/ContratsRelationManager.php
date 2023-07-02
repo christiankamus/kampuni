@@ -36,7 +36,8 @@ class ContratsRelationManager extends RelationManager
                         ]),
                     DatePicker::make('date_debut')
                         ->required(),
-                    DatePicker::make('date_fin'),
+                    DatePicker::make('date_fin')
+                        ->after('date_debut'),
                     Select::make('raison_sortie')
                         ->options([
                             'Démission' => 'Démission',

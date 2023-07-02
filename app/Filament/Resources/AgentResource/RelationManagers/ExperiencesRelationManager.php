@@ -47,6 +47,7 @@ class ExperiencesRelationManager extends RelationManager
                 TextColumn::make('date_debut')
                     ->dateTime('d-M-Y')->sortable(),
                 TextColumn::make('date_fin')
+                    ->after('date_debut')
                     ->dateTime('d-M-Y')->sortable(),
                 TextColumn::make('details')->label('Fonction'),
             ])

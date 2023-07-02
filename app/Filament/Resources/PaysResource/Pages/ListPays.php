@@ -10,6 +10,9 @@ class ListPays extends ListRecords
 {
     protected static string $resource = PaysResource::class;
 
+    protected ?string $heading = 'Liste des pays';
+    protected ?string $subheading = 'Veuillez cliquer sur un pays pour le modifier ou gérer ses provinces';
+
     protected function getActions(): array
     {
         return [

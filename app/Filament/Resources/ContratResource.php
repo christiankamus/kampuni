@@ -17,12 +17,23 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ContratResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ContratResource\RelationManagers;
+use Carbon\Carbon;
 
 class ContratResource extends Resource
 {
     protected static ?string $model = Contrat::class;
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationGroup = 'Alertes et reporting';
+
+
+    protected static ?string $navigationLabel = 'Contrats expirants';
+
+    public static function getEloquentQuery(): Builder
+    {
+
+            return parent::getEloquentQuery()->where('date_fin','>',now())->where('date_fin','<',now()->addMonth(3));
+
+    }
 
     public static function form(Form $form): Form
     {
@@ -54,28 +65,33 @@ class ContratResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('type_contrat_id'),
-                TextColumn::make('agent_id'),
+                TextColumn::make('agent.nom'),
+                TextColumn::make('agent.postnom'),
+                TextColumn::make('agent.prenom'),
+                TextColumn::make('type_contrat.nom'),
                 TextColumn::make('mode_entree'),
                 TextColumn::make('date_debut')
-                    ->date(),
+                    ->dateTime('d-M-Y')->sortable()->label('Début contrat'),
                 TextColumn::make('date_fin')
-                    ->date(),
-                TextColumn::make('raison_sortie'),
-                TextColumn::make('commentaire'),
-                TextColumn::make('created_at')
-                    ->dateTime(),
-                TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime('d-M-Y')->sortable()->label('Fin contrat'),
+                TextColumn::make('Expire dans')
+                    ->getStateUsing(function(Contrat $record) {
+                        // return whatever you need to show
+                        //$datedebut = Carbon::parse($record->date_debut);
+                        $datefin = Carbon::parse($record->date_fin);
+                        $nbreJours = now()->diffInMonths($datefin);
+                        return ($nbreJours==0)? now()->diffInDays($datefin).' jours':$nbreJours.' mois';
+                    }),
+                
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                //Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
@@ -90,8 +106,8 @@ class ContratResource extends Resource
     {
         return [
             'index' => Pages\ListContrats::route('/'),
-            'create' => Pages\CreateContrat::route('/create'),
-            'edit' => Pages\EditContrat::route('/{record}/edit'),
+            //'create' => Pages\CreateContrat::route('/create'),
+           // 'edit' => Pages\EditContrat::route('/{record}/edit'),
         ];
     }    
 }

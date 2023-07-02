@@ -10,6 +10,9 @@ class ManageNiveauEtudes extends ManageRecords
 {
     protected static string $resource = NiveauEtudeResource::class;
 
+    protected ?string $heading = 'Liste des niveaux d\'étude';
+
+
     protected function getActions(): array
     {
         return [

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('agent_id')->constrainted();
             $table->foreignId('type_document_id')->constrainted();
-            $table->string('commentaire');
+            $table->string('document')->nullable();
+            $table->string('commentaire')->nullable();
             $table->timestamps();
         });
             

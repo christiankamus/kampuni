@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\SiteResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SiteResource\RelationManagers;
+use App\Models\User;
 
 class SiteResource extends Resource
 {
@@ -35,7 +36,7 @@ class SiteResource extends Resource
                 Card::make()
                     ->schema([
                         Select::make('user_id')
-                            ->relationship('user','name')
+                            ->options(User::where('is_admin','0')->pluck('name','id')->toArray()) 
                             ->searchable()
                             ->preload()
                             ->label('GSP'),

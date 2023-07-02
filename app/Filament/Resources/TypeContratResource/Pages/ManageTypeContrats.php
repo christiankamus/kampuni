@@ -10,6 +10,8 @@ class ManageTypeContrats extends ManageRecords
 {
     protected static string $resource = TypeContratResource::class;
 
+    protected ?string $heading = 'Liste des types de contrat';
+
     protected function getActions(): array
     {
         return [
