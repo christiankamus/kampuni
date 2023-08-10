@@ -32,6 +32,7 @@ class ExperiencesRelationManager extends RelationManager
                 DatePicker::make('date_debut')
                     ->required(),
                 DatePicker::make('date_fin')
+                    ->after('date_debut')
                     ->required(),
                 TextInput::make('details')->label('Fonction')
                     ->required()
@@ -46,8 +47,7 @@ class ExperiencesRelationManager extends RelationManager
                 TextColumn::make('entreprise.nom'),
                 TextColumn::make('date_debut')
                     ->dateTime('d-M-Y')->sortable(),
-                TextColumn::make('date_fin')
-                    ->after('date_debut')
+                TextColumn::make('date_fin')                    
                     ->dateTime('d-M-Y')->sortable(),
                 TextColumn::make('details')->label('Fonction'),
             ])

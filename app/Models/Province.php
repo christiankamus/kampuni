@@ -26,6 +26,6 @@ class Province extends Model
 
     public function pays()
     {
-        return $this->belongsTo(pays::class);
+        return $this->belongsTo(Pays::class);
     }
 }

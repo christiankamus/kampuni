@@ -37,7 +37,7 @@ return new class extends Migration
             $table->foreignId('fonction_id')->constrainted();
             $table->foreignId('equipe_id')->constrainted()->nullable();
             $table->foreignId('section_id')->constrainted()->nullable();
-            $table->foreignId('service_id')->constrainted();
+            $table->foreignId('service_id')->constrainted()->nullable();
             $table->foreignId('departement_id')->constrainted();
             $table->foreignId('site_id')->constrainted();
             $table->boolean('is_actif');

@@ -103,7 +103,7 @@ class Agent extends Model
 
     public function fonction()
     {
-        return $this->belongsTo(fonction::class);
+        return $this->belongsTo(Fonction::class);
     }
 
     public function equipe()

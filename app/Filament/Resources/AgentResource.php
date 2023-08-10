@@ -230,7 +230,6 @@ class AgentResource extends Resource
                             ->reactive()
                             ->searchable()
                             ->preload()
-                            ->required()
                             ->label('Service')
                             ->afterStateUpdated(fn (callable $set) => $set('section_id', null) ),
                         Select::make('section_id')
@@ -245,7 +244,6 @@ class AgentResource extends Resource
                             ->reactive()
                             ->searchable()
                             ->preload()
-                            ->required()
                             ->label('Section'),
                         Select::make('site_id')
                             ->options(function(callable $get){
@@ -265,7 +263,6 @@ class AgentResource extends Resource
                             ->relationship('equipe','nom')
                             ->searchable()
                             ->preload()
-                            ->required()
                             ->label('Equipe'),       
                 ])->columns(4)->collapsible()->collapsed(), 
                
