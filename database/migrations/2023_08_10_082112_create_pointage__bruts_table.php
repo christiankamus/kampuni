@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('pointage__bruts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('agent_id')->constrainted();
-            $table->date('date_heure_pointage');
+            $table->string('nom');
+            $table->timestamps('heure_entree');
+            $table->timestamps('heure_sortie');
             $table->date('date_pointage');
             $table->string('site');
+            $table->string('commentaire');
             $table->timestamps();
         });
     }

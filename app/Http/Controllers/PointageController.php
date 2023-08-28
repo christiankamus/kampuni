@@ -24,15 +24,37 @@ class PointageController extends Controller
         else
         {
             $input['agent_id'] = $agent->id;
-            $input['date_heure_pointage'] = Carbon::parse($request->date_heure_pointage);
+            $input['nom'] = $agent->matricule." ".$agent->postnom." ".$agent->prenom;
+            $input['heure_entree'] = Carbon::parse($request->heure_entree);
+            $input['heure_sortie'] = Carbon::parse($request->heure_sortie);
             $input['date_pointage'] = Carbon::parse($request->date_pointage);
+            $input['commentaire'] = $request->commentaire;
 
-            $pointage = Pointage_Brut::create($input);
+            $pointagecheck = Pointage_Brut::where('agent_id',$agent->id)
+                                          ->where('date_pointage',Carbon::parse($request->date_pointage));
 
-            $data = [
-                "status" => "Oui",
-                "Message" => "Agent ayant le matricule ".$request->agent_id." existe",          
-            ];
+            if (is_null($pointagecheck )) 
+            {
+                $pointage = Pointage_Brut::create($input);
+
+                $data = [
+                    "status" => "Oui, nouveau pointage créé",
+                    "Message" => "Agent ayant le matricule ".$request->agent_id." existe",          
+                ];
+            }
+            else
+            {
+                $pointagecheck->delete();
+                /*$pointagecheck = Pointage_Brut::where('agent_id',$agent->id)
+                ->where('heure_entree',Carbon::parse($request->heure_entree))
+                ->where('heure_sortie',Carbon::parse($request->heure_sortie))
+                ->where('site',$request->site)->get()->first();*/
+                $pointage = Pointage_Brut::create($input);
+                $data = [
+                    "status" => "Oui, ancien pointage mis à jour",
+                    "Message" => "Agent ayant le matricule ".$request->agent_id." existe",             
+                ];
+            }
         }
         
 

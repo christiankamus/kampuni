@@ -11,9 +11,12 @@ class Pointage_Brut extends Model
 
     protected $fillable = [
         'agent_id',
-        'date_heure_pointage',
+        'nom',
+        'heure_entree',
+        'heure_sortie',
         'date_pointage',
-        'site'
+        'site',
+        'commentaire'
     ];
 
     public function agent()
