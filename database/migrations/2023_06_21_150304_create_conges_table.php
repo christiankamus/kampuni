@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('agent_id')->constrainted();
             $table->foreignId('exercice_id')->constrainted();
+            $table->foreignId('type_conge_id')->constrainted();
             $table->date('date_debut');
             $table->date('date_fin');
             $table->integer('jours_pris');

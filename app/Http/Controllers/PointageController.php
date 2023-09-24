@@ -28,10 +28,12 @@ class PointageController extends Controller
             $input['heure_entree'] = Carbon::parse($request->heure_entree);
             $input['heure_sortie'] = Carbon::parse($request->heure_sortie);
             $input['date_pointage'] = Carbon::parse($request->date_pointage);
+            $input['site'] = Carbon::parse($request->site);
             $input['commentaire'] = $request->commentaire;
 
             $pointagecheck = Pointage_Brut::where('agent_id',$agent->id)
-                                          ->where('date_pointage',Carbon::parse($request->date_pointage));
+                                          ->where('date_pointage',Carbon::parse($request->date_pointage))
+                                          ->where('site',$request->site);
 
             if (is_null($pointagecheck )) 
             {

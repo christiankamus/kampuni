@@ -12,6 +12,7 @@ class Conge extends Model
     protected $fillable = [
         'agent_id',
         'exercice_id',
+        'type_conge_id',
         'date_debut',
         'date_fin',
         'jours_pris',
@@ -26,5 +27,10 @@ class Conge extends Model
     public function exercice()
     {
         return $this->belongsTo(Exercice::class);
+    }
+
+    public function type_conge()
+    {
+        return $this->belongsTo(type_conge::class);
     }
 }

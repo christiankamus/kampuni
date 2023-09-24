@@ -25,8 +25,9 @@ class ContratResource extends Resource
 
     protected static ?string $navigationGroup = 'Alertes et reporting';
 
+    protected static bool $shouldRegisterNavigation = false;
 
-    protected static ?string $navigationLabel = 'Contrats expirants';
+    //protected static ?string $navigationLabel = 'Contrats expirants';
 
     public static function getEloquentQuery(): Builder
     {
@@ -68,7 +69,7 @@ class ContratResource extends Resource
                 TextColumn::make('agent.nom'),
                 TextColumn::make('agent.postnom'),
                 TextColumn::make('agent.prenom'),
-                TextColumn::make('type_contrat.nom'),
+                TextColumn::make('type_contrat.nom')->label('Type contrat'),
                 TextColumn::make('mode_entree'),
                 TextColumn::make('date_debut')
                     ->dateTime('d-M-Y')->sortable()->label('Début contrat'),

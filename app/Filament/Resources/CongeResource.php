@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CongeResource\Pages;
-use App\Filament\Resources\CongeResource\RelationManagers;
-use App\Models\Conge;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Conge;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\CongeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\CongeResource\RelationManagers;
 
 class CongeResource extends Resource
 {
@@ -25,7 +26,13 @@ class CongeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('agent_id')
                     ->required(),
-                Forms\Components\TextInput::make('exercice_id')
+                Select::make('exercice_id')
+                    ->relationship('exercice','nom')
+                    ->preload()
+                    ->required(),
+                Select::make('type_conge_id')
+                    ->relationship('type_conge','nom')
+                    ->preload()
                     ->required(),
                 Forms\Components\DatePicker::make('date_debut')
                     ->required(),
@@ -41,7 +48,8 @@ class CongeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('agent_id'),
-                Tables\Columns\TextColumn::make('exercice_id'),
+                Tables\Columns\TextColumn::make('exercice.nom')->label('Exercice'),
+                Tables\Columns\TextColumn::make('type_conge.nom')->label('Type de congé'),
                 Tables\Columns\TextColumn::make('date_debut')
                     ->date(),
                 Tables\Columns\TextColumn::make('date_fin')
